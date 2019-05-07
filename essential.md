@@ -22,6 +22,7 @@ Please follow the instruction --
 
 
 'PHPExcel' => array($vendorDir . '/phpoffice/phpexcel/Classes'),
+
 4:- Now you can use PHPEXCEL library in your controllers or middleware or library.
 
 use PHPExcel; 
