@@ -27,9 +27,38 @@ Please follow the instruction --
 
 4:- Now you can use PHPEXCEL library in your controllers or middleware or library.
 
-```
+```php
 use PHPExcel; 
 use PHPExcel_IOFactory;
 ```
 
 -------------------------------
+
+# attach - sync
+  
+Model - Article.php
+```php
+public function categories(){
+        return $this->belongsToMany(Category::class);
+    }
+```
+Model - Category.php
+```php
+        public function articles() {
+        return $this->belongsToMany(Article::class);
+    }
+```
+
+ArticleController@store
+  ```php
+          $article = auth()
+                    ->user()
+                    ->articles()
+                    ->create(request(['title' , 'body']));
+
+        $article->categories()->attach(request('category'));
+```
+ArticleController@store
+```php
+                $article->categories()->sync(request('category'));
+```
