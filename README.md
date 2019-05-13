@@ -1,9 +1,9 @@
-#### Disable foreignKey error when migration
+### Disable foreignKey error when migration
 app\Provicers\AppServiceProvider ~> Schema::disableForeignKeyConstraints();
 
 ---------------
 
-#### PHPExcel
+### PHPExcel
 https://stackoverflow.com/questions/23764375/how-i-can-install-the-phpexcel-library-in-laravel
 
 - Step 3 is automated add
@@ -34,7 +34,7 @@ use PHPExcel_IOFactory;
 
 -------------------------------
 
-# attach - sync
+### attach - sync
   
 Model - Article.php
 ```php
@@ -62,3 +62,13 @@ ArticleController@store
 ```php
                 $article->categories()->sync(request('category'));
 ```
+------------------------
+### Append data to query field
+```php
+        Post::orderBy('id', 'desc')
+            ->paginate(10)->map(function($post){
+            $post->imageUrl = env('APP_URL').$post->imageUrl;
+            return $doctor;
+        });
+```
+
