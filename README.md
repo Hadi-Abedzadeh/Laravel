@@ -21,7 +21,7 @@ Please follow the instruction --
 3:- Open the file "/vendor/composer/autoload_namespaces.php". Paste the below line in the file.
 
 
-```
+```php
 'PHPExcel' => array($vendorDir . '/phpoffice/phpexcel/Classes'),
 ```
 
@@ -39,36 +39,34 @@ use PHPExcel_IOFactory;
 Model - Article.php
 ```php
 public function categories(){
-        return $this->belongsToMany(Category::class);
-    }
+  return $this->belongsToMany(Category::class);
+}
 ```
 Model - Category.php
 ```php
-        public function articles() {
-        return $this->belongsToMany(Article::class);
-    }
+public function articles() {
+  return $this->belongsToMany(Article::class);
+}
 ```
 
 ArticleController@store
   ```php
-          $article = auth()
-                    ->user()
-                    ->articles()
-                    ->create(request(['title' , 'body']));
-
-        $article->categories()->attach(request('category'));
+$article = auth()
+          ->user()
+          ->articles()
+          ->create(request(['title' , 'body']));
+$article->categories()->attach(request('category'));
 ```
 ArticleController@store
 ```php
-                $article->categories()->sync(request('category'));
+  $article->categories()->sync(request('category'));
 ```
 ------------------------
 ### Append data to query field
 ```php
-        Post::orderBy('id', 'desc')
-            ->paginate(10)->map(function($post){
-            $post->imageUrl = env('APP_URL').$post->imageUrl;
-            return $doctor;
-        });
+Post::orderBy('id', 'desc')->paginate(10)->map(function($post){
+    $post->imageUrl = env('APP_URL').$post->imageUrl;
+    return $doctor;
+});
 ```
 
